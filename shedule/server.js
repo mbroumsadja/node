@@ -1,18 +1,25 @@
 import express from 'express';
-// import './models/synchronisation.js'
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import route from './route/routeAuthentification.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'node:path';
 
+
+dotenv.config();
+const port = process.env.PORT;
 const app = express();
-const port = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname, 'views'));
 
-app.get('/date', (req, res) => {
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
-    res.send(`Current date: ${format(now, 'yyyy-MM-dd HH:mm:ss')}, Future date: ${format(futureDate, 'yyyy-MM-dd')}`);
-});
+app.use(route);
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+app.listen(port,(req,res)=>{console.log(`le serveur tourne sur le http://localhost:${port}`)})

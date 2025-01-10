@@ -7,4 +7,3 @@ sequelize.sync({ force: true }).then(() => {
 }).catch((err) => {
   console.log("Erreu: PROBLEME LORS DE LA CREATION DES TABLES", err);
 });
-

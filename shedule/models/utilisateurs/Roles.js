@@ -5,11 +5,11 @@ const Roles = sequelize.define(
   "Roles",
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+autoIncrement:true
     },
-    nomeRole: {
+    nomRole: {
       type: DataTypes.STRING,
       allowNull: true,
       defaultValue: 'user',

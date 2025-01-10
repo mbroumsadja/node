@@ -1,15 +1,15 @@
-import { DataTypes } from "sequelize";
+import { DataTypes} from "sequelize";
 import sequelize from "../../config/db.js";
 
 const Universites = sequelize.define(
   "Universites",
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+autoIncrement:true
     },
-    Universite: {
+    nomUniversite: {
       type: DataTypes.STRING,
       allowNull: true,
     },

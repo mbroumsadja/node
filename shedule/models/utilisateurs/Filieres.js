@@ -5,9 +5,9 @@ const Filieres = sequelize.define(
   "Filieres",
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+autoIncrement:true
     },
     niveau: {
       type: DataTypes.STRING,
@@ -33,7 +33,7 @@ const Filieres = sequelize.define(
       allowNull: true,
     },
     DepartementId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
   },

@@ -5,9 +5,9 @@ const seances = sequelize.define(
   "Seances",
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      autoIncrement:true
     },
     jourSeance: {
       type: DataTypes.DATE,
@@ -42,11 +42,11 @@ const seances = sequelize.define(
       allowNull: false,
     },
     EnseignantId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     FiliereId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

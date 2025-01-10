@@ -31,5 +31,4 @@ Departements.belongsTo(Facultes, {foreignKey: 'FaculteId'});
 Departements.hasMany(Filieres, {foreignKey: 'DepartementId'});
 Filieres.belongsTo(Departements, {foreignKey: 'DepartementId'});
 
-export { Utilisateurs, Universites,Facultes, Departements, Filieres, Roles, UtilisateurRoles };
 

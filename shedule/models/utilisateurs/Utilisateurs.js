@@ -6,8 +6,8 @@ const Utilisateurs = sequelize.define(
   "Utilisateurs",
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+autoIncrement:true,
       primaryKey: true,
     },
     nomPrenom: {
@@ -32,19 +32,19 @@ const Utilisateurs = sequelize.define(
       allowNull: true,
     },
     UniversiteId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     FaculteId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     DepartementId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     FiliereId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

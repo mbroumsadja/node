@@ -5,16 +5,16 @@ const Facultes = sequelize.define(
   "Facultes",
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+autoIncrement:true
     },
     nomFaculte: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     UniversiteId: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
