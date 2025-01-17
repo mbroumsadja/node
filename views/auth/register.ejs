@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/auth.css">
+    <title>shedule | register</title>
+</head>
+<body>
+
+    <div class="menus">
+        <button><a href="/">retour</a></button>
+    </div>
+
+    <div class="menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+         <rect width="32" height="5" fill="black"/>
+       </svg>
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 0 32 5">
+         <rect width="32" height="5" fill="black"/>
+       </svg>
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+         <rect width="32" height="5" fill="black"/>
+       </svg>
+     </div>
+
+    <div class="containers container">
+        <div class="head">
+            <h3>SIGNUP</h3>
+            <div>
+                <button type="button"></button>
+                <button type="button"></button>
+                <button type="button"></button>
+            </div>
+        </div>
+
+        <form action="/login" method="post">
+            <p>Information personnel </p>
+            <div class="form-input-type" id="type">
+                <div class="form-input">
+                    <label for="nom">Nom :</label>
+                    <input type="text" name="nom" id="">
+                   </div>
+
+                   <div class="form-input">
+                    <label for="nom">Prenom :</label>
+                    <input type="text" name="prenom" id="">
+                   </div>
+            </div>
+            <div class="form-input">
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="" placeholder="example@gmail.com">
+            </div>
+            <div class="form-input">
+                <label for="numeroTel">Numero:</label>
+                <input type="tel" name="numeroTel" id="" placeholder="698044764" minlength="9">
+            </div>
+           <div class="form-input">
+            <label for="password">password :</label>
+            <input type="password" name="password" id="" minlength="12" maxlength="20">
+           </div>
+           <p>Donner Academique </p>
+            <div class="form-input">
+                <label for="nomUniversite">Universite :</label>
+                <select name="nomUniversite" id="">
+                   <option value="">Choix de l'universite</option>
+                   <option value="1">universite de Garoua</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="nomFaculte">Faculte :</label>
+                <select name="nomFaculte" id="">
+                   <option value="">selectionner Faculte</option>
+                   <option value="1">Faculte des science</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="nomDepartement">Departement :</label>
+                <select name="nomDepartement" id="">
+                   <option value="">Choix du Departement</option>
+                   <option value="1">Mathematique-informatique</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="nomFilier">Filiere :</label>
+                <select name="nomFilier" id="">
+                   <option value="">Filiere</option>
+                   <option value="1">Informatique</option>
+                   <option value="2">Mathematique</option>
+                </select>
+            </div>
+            <button type="submit" style="background-color: black; color: white;">enregistre</button>
+            </form>
+        
+            <div class="register">vous avez deja un compte <a href="/auth/login">connecter vous</a></div>
+        
+    </div>
+</body>
+</html>

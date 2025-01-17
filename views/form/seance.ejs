@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/css/auth.css">
+
+<div class="menu">
+    <button>annuler</button>
+</div>
+
+<div class="containers container">
+    <div class="head">
+        <h3>CREATE SEANCES</h3>
+        <div>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+        </div>
+    </div>
+
+    <form action="/seance" method="post">
+        <div class="form-input">
+            <label for="nomCours">Cours :</label>
+            <input type="text" name="nomCours" id="">
+        </div>
+        <div class="form-input">
+            <label for="CodeUnite">codeUnite :</label>
+            <input type="text" name="codeUnite" id="">
+        </div>
+        <div class="form-input">
+            <label for="Debut">Debut :</label>
+            <input type="datetime-local" name="debut" id="">
+        </div>
+        <div class="form-input">
+            <label for="fin">Fin :</label>
+            <input type="datetime-local" name="fin" id="">
+        </div>
+        <div class="form-input">
+            <label for="decription">Description :</label>
+            <textarea name="decription" id=""></textarea>
+        </div>
+        <div class="form-input">
+            <label for="JourCour">Jour :</label>
+            <input type="date" name="jourCour" id="">
+        </div>
+        <div class="form-input">
+            <label for="lieuCour">Lieu :</label>
+            <input type="text" name="lieuCour" id="">
+        </div>
+        <div class="form-input">
+            <label for="salleCour">Salle :</label>
+            <select name="salle" id="">
+                <option value="">selectionner la salle</option>
+                <option value="1">SALLE C</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="enseignantId">Enseignant :</label>
+            <select name="enseignantId" id="">
+                <option value="">selectionner enseignant</option>
+                <option value="1">Dr.Saoungoumi</option>
+                <option value="2">Dr.Guidana</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="filiereId">Filiere :</label>
+            <select name="filiereId" id="">
+                <option value="">selectionner la filiere</option>
+                <option value="1">informatique</option>
+                <option value="2">mathematique</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="support">Support :</label>
+            <input style="text-align: center; padding-top:.5rem ;" type="file" name="support" id="">
+        </div>
+        <button type="submit">enregistre</button>
+    </form>
+</div>

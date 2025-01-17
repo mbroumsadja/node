@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/auth.css">
+    <title>shedule | login</title>
+</head>
+<body>
+
+    <div class="menus">
+        <button><a href="/">retour</a></button>
+    </div>
+
+    <div class="menu">
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+        <rect width="32" height="5" fill="black"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 0 32 5">
+        <rect width="32" height="5" fill="black"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+        <rect width="32" height="5" fill="black"/>
+      </svg>
+    </div>
+   <div class="container">
+
+    <div class="head">
+        <h3>LOGIN</h3>
+        <div>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+        </div>
+    </div>
+
+    <form action="/login" method="post">
+
+    <div class="form-input">
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="" placeholder="example@gmail.com">
+
+    </div>
+   <div class="form-input">
+    <label for="password">password :</label>
+    <input type="password" name="password" id="" minlength="12" maxlength="20">
+
+   </div>
+        <button type="submit" style="background-color: black; color: white;">connecter</button>
+    </form>
+
+    <div class="register">vous n'avez pas de compte <a href="/auth/register">créé un compte</a></div>
+
+   </div>
+</body>
+</html>

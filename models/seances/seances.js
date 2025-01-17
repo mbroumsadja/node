@@ -9,11 +9,11 @@ const seances = sequelize.define(
       primaryKey: true,
       autoIncrement:true
     },
-    jourSeance: {
-      type: DataTypes.DATE,
+    nomCours: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    nomSeance: {
+    codeUnite: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -25,19 +25,19 @@ const seances = sequelize.define(
       type: DataTypes.TIME,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    jourSeance: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     lieuCour: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     salleCour: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    codeUnite: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -49,6 +49,11 @@ const seances = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    support:{
+      type:DataTypes.STRING,
+      allowNull:true,
+      defaultValues:"aucun support"
+    }
   },
   { timestamps: true }
 );
