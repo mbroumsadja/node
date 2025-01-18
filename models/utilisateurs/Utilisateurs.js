@@ -10,7 +10,11 @@ const Utilisateurs = sequelize.define(
       autoIncrement:true,
       primaryKey: true,
     },
-    nomPrenom: {
+    nom: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    prenom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -31,21 +35,17 @@ const Utilisateurs = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    UniversiteId: {
+    UniversiteId:{
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull:false
     },
-    FaculteId: {
+    FaculteId:{
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull:false
     },
-    DepartementId: {
+    DepartementId:{
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    FiliereId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull:false
     },
   },
   { timestamps: true }

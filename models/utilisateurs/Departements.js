@@ -11,12 +11,12 @@ autoIncrement:true
     },
     nomDepartement: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
-    FaculteId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
+   FaculteId:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+   }
   },
   { timestamps: true }
 );

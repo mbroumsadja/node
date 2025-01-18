@@ -1,5 +1,4 @@
 import express from "express";
-
 const auth = express.Router();
 
 
@@ -13,7 +12,7 @@ auth.get('/auth/register',(req, res) =>{
 
 auth.get('/auth/form',(req, res) =>{
     res.render('./auth/form');
-})
+});
 
 export default auth;
 

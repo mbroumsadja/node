@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/auth.css">
+<div class="menus">
+    <button><a href="/create">annuler</a></button>
+</div>
+
+<div class="container">
+
+    <div class="head">
+        <h3>CREATE FACULTE</h3>
+        <div>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+        </div>
+    </div>
+
+    <form action="/faculte" method="post">
+        <div class="form-input">
+            <label for="universite">Univeriste:</label>
+            <select name="UniversiteId" id="">
+                <option value="">choisir universite</option>
+                <option value="1">Universite garoua</option>
+             </select>
+        </div>
+    <div class="form-input">
+        <label for="faculte">Nom Faculte:</label>
+        <input type="text" name="nomFaculte" id="" placeholder="nom de la faculter">
+    </div>
+        <button type="submit" style="background-color: black; color: white;">enregistre</button>
+    </form>
+
+   </div>

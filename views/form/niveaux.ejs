@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/css/auth.css">
+<div class="menus">
+    <button><a href="/create">annuler</a></button>
+</div>
+
+<div class="container">
+
+    <div class="head">
+        <h3>CREATE NIVEAUX</h3>
+        <div>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+        </div>
+    </div>
+
+    <form action="/niveau" method="post">
+        <div class="form-input">
+            <label for="filiereId">Filiere :</label>
+            <select name="FiliereId" id="">
+                <option value="">selectionner la filiere</option>
+                <option value="1">mathematique</option>
+                <option value="2">informatique</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="niveaux">Niveaux :</label>
+            <select name="niveaux" id="">
+                <option value="">selectionner la filiere</option>
+                <option value="Licence 1">Licence 1</option>
+                <option value="Licence 2">Licence 2</option>
+            </select>
+        </div>
+ 
+        <button type="submit" style="background-color: black; color: white;">enregistre</button>
+    </form>
+
+   </div>

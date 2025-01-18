@@ -1,10 +1,21 @@
 <link rel="stylesheet" href="/css/auth.css">
 
 <div class="menu">
-    <button>annuler</button>
-</div>
-
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+     <rect width="32" height="5" fill="black"/>
+   </svg>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 0 32 5">
+     <rect width="32" height="5" fill="black"/>
+   </svg>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
+     <rect width="32" height="5" fill="black"/>
+   </svg>
+ </div>
 <div class="containers container">
+    <div class="menus">
+        <button><a href="/create">annuler</a></button>
+    </div>
+
     <div class="head">
         <h3>CREATE SEANCES</h3>
         <div>
@@ -27,26 +38,22 @@
         </div>
         <div class="form-input">
             <label for="Debut">Debut :</label>
-            <input type="datetime-local" name="debut" id="">
+            <input type="time" name="debut" id="">
         </div>
         <div class="form-input">
             <label for="fin">Fin :</label>
-            <input type="datetime-local" name="fin" id="">
+            <input type="time" name="fin" id="">
         </div>
         <div class="form-input">
-            <label for="decription">Description :</label>
-            <textarea name="decription" id=""></textarea>
+            <label for="Jour">Jour :</label>
+            <input type="date" name="jour" id="">
         </div>
         <div class="form-input">
-            <label for="JourCour">Jour :</label>
-            <input type="date" name="jourCour" id="">
+            <label for="lieu">Lieu :</label>
+            <input type="text" name="lieu" id="">
         </div>
         <div class="form-input">
-            <label for="lieuCour">Lieu :</label>
-            <input type="text" name="lieuCour" id="">
-        </div>
-        <div class="form-input">
-            <label for="salleCour">Salle :</label>
+            <label for="salle">Salle :</label>
             <select name="salle" id="">
                 <option value="">selectionner la salle</option>
                 <option value="1">SALLE C</option>
@@ -54,7 +61,7 @@
         </div>
         <div class="form-input">
             <label for="enseignantId">Enseignant :</label>
-            <select name="enseignantId" id="">
+            <select name="enseignant" id="">
                 <option value="">selectionner enseignant</option>
                 <option value="1">Dr.Saoungoumi</option>
                 <option value="2">Dr.Guidana</option>
@@ -62,7 +69,15 @@
         </div>
         <div class="form-input">
             <label for="filiereId">Filiere :</label>
-            <select name="filiereId" id="">
+            <select name="filiere" id="">
+                <option value="">selectionner la filiere</option>
+                <option value="1">niveaux 1</option>
+                <option value="2">niveaux 2</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="Niveaux">Niveaux :</label>
+            <select name="niveaux" id="">
                 <option value="">selectionner la filiere</option>
                 <option value="1">informatique</option>
                 <option value="2">mathematique</option>

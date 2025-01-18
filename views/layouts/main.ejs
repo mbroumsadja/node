@@ -8,6 +8,10 @@
 </head>
 <body>  
 
+  <div style="right: 0;position: absolute;top: 0; margin-top: .28rem; padding: .5rem .1rem;">
+    <button style="padding: .2rem 1rem; font-size: 16px; border: none; border-radius: 5px;background-color: black;"><a href="/" style="color: white;">reload</a></button>
+  </div>
+  
     <div class="menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
          <rect width="32" height="5" fill="black"/>
@@ -20,24 +24,13 @@
        </svg>
      </div>
 
-    <div class="container">
-    <a href="/home">
-    <div class="items">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2L2 12h3v8h14v-8h3L12 2zM12 15c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="currentColor"/>
-          </svg>
-          <h4>WELCOM</h4>
-    </div>
-   </a>
-      <a href="/shedule">
-        <div class="items">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 6v6l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <h4>SHEDULE</h4>
+    <div class="containerst">
+      <a href="/shedule"> 
+        <div class="items" style="background: rgba(0, 0, 0, 0.582);">
+              <h4  style=" color: white;">SHEDULE</h4>
         </div>
       </a>
+      
     <a href="/day">
         <div class="items">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -66,5 +59,32 @@
         </div>
      </a>
     </div>
+
+
+    <main>
+
+<% if (nom.length >0) { %>
+
+  <p style="font-size:2rem; margin-bottom: 2rem;text-transform: uppercase;">Voici Ton Emplois de Temps <span style="color: rgb(0, 217, 255); background: rgba(0, 0, 0, 0.692);"><%= nom %></span></p>
+<% } %>
+
+      <% if (seance.length > 0) { %>
+        <% seance.forEach(data => { %>
+          <div>
+            <h2><%= data.nomCours %></h2>
+            <p><%= data.codeUnite %></p>
+            <p><%= data.debut %></p>
+            <p><%= data.fin %></p>
+            <p><%= data.jourCour %></p>
+            <p><%= data.salleCour %></p>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>aucune seances disponible</p>
+       
+      <% } %>
+
+      
+    </main>
 </body>
 </html>

@@ -25,11 +25,7 @@ const seances = sequelize.define(
       type: DataTypes.TIME,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    jourSeance: {
+    jourCour: {
       type: DataTypes.DATE,
       allowNull: false,
     },
@@ -45,9 +41,13 @@ const seances = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    FiliereId: {
+    FiliereId:{
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
+    },
+    NiveauxId:{
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     support:{
       type:DataTypes.STRING,

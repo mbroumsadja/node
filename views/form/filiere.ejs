@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/auth.css">
+<div class="menus">
+    <button><a href="/create">annuler</a></button>
+</div>
+
+<div class="container">
+
+    <div class="head">
+        <h3>CREATE FILIERE</h3>
+        <div>
+            <button type="button"></button>
+            <button type="button"></button>
+            <button type="button"></button>
+        </div>
+    </div>
+
+    <form action="/filiere" method="post">
+        <div class="form-input">
+            <label for="nomDepartement">Departement :</label>
+            <select name="DepartementId" id="">
+               <option value="">Choix du Departement</option>
+               <option value="1">Mathematique-informatique</option>
+            </select>
+        </div>
+    <div class="form-input">
+        <label for="filiere">Filiere:</label>
+        <input type="text" name="nomFiliere" id="" placeholder="nom de la filiere">
+    </div>
+
+        <button type="submit" style="background-color: black; color: white;">enregistre</button>
+    </form>
+
+   </div>

@@ -12,6 +12,7 @@ autoIncrement:true
     nomUniversite: {
       type: DataTypes.STRING,
       allowNull: true,
+      unique: true
     },
   },
   { timestamps: true }
