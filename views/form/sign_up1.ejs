@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/Fichier 4.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>schedule -login</title>
+</head>
+<body>
+    <div class="containers">
+        <div class="message" id="message"></div>
+        <div class="afficheur" id="afficheur">
+            <div class="question" id="question"></div>
+            <div class="answer" id="answer"></div>
+        </div>
+        <div class="reponse" id="reponse">
+            <input type="text" name="reponse" id="reponse">
+            <button  class="btn" type="button"></button>
+        </div>
+    </div>
+    <script>
+        
+        const message = document.getElementById('message');
+        message.textContent ="SIGNUP"
+        document.getElementById('question').textContent = " Bienvenue pour vous enregistre veuillez repondre au question pose Veullez saisir votre matricule ?"
+        document.getElementById('answer').textContent = "cm-uga-23FS0295"
+    </script>
+</body>
+</html>

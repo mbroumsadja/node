@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/Fichier 4.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/admin.css">
+    <title>schedule -login|admin</title>
+</head>
+<body>
+    <div class="container">
+        <form action="/login_admin" method="post">
+            <div class="message" id="message"></div>
+            <div class="title">Login to schedule</div>
+           <div class="inputs">
+             <input type="email" name="email" id="email" placeholder="Email:" required>
+             <input type="password" name="password" id="password" placeholder="Password:" required maxlength="20">
+           </div>
+           <div class="sign">
+            i don't have already account! <a href="/sign_up">signup</a>
+           </div>
+           <button type="submit"><span>login</span></button>
+        </form>
+        <span>or go on with</span>
+        <div class="api_login">
+         <img src="" alt="" srcset="" width="70" height="70">
+         <img src="" alt="" srcset="" width="70" height="70">
+         <img src="" alt="" srcset="" width="70" height="70">
+         <img src="" alt="" srcset="" width="70" height="70">
+        </div>
+    </div>
+    <script>
+        const message = document.getElementById('message');
+        message.textContent ="WELCOM"
+        
+    </script>
+</body>
+</html>

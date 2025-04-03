@@ -1,66 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="shortcut icon" href="/img/Fichier 4.svg" type="image/x-icon">
     <title>shedule</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/auth.css">
 </head>
 <body>
-    <div class="menu">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
-         <rect width="32" height="5" fill="black"/>
-       </svg>
-       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
-         <rect width="20" height="5" fill="black"/>
-       </svg>
-       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 5">
-         <rect width="32" height="5" fill="black"/>
-       </svg>
-     </div>
+    
+    <header>
+        <button type="button"></button>
+        <div class="header-title">schedule</div>
+        <button type="button"></button>
+    </header>
 
+    <div class="pull-indicator" id="pullIndicator">
+        <i class="fas fa-arrow-down"></i> &nbsp; Tirez pour actualiser
+    </div>
 
+    <div class="date-navigator" id="dateNavigator">
+        <!-- Les dates seront générées dynamiquement -->
+    </div>
 
-        <div class="containers container">
-          <div class="head">
-            <h2>REMPLIR LE FORMULAIRE</h2>
-          </div>
-
-          <form action="/seances" method="post">
-            <div class="form-input">
-              <label for="nom">Nom :</label>
-              <input type="text" name="nom" id=""" maxlength="30" placeholder=" Le nom est optionel">
-             </div>
-             <div class="form-input">
-              <label for="nomDepartement">Departement :</label>
-              <select name="DepartementId" id="" required>
-                 <option value="">Choix du Departement</option>
-                 <option value="1">Mathematique-informatique</option>
-              </select>
-          </div>
-          
-            <div class="form-input">
-              <label for="Filiere">Filiere:</label>
-              <select name="FiliereId" id="" required>
-                 <option value="">Choix de la filiere</option>
-                 <option value="1">mathematique</option>
-                 <option value="2">Informatique</option>
-              </select>
-          </div>
-
-          <div class="form-input">
-              <label for="Niveaux">Niveaux:</label>
-              <select name="NiveauxId" id="" required>
-                 <option value="">selectionner niveau</option>
-                 <option value="1">niveau 1</option>
-                 <option value="2">niveau 2</option>
-                 <option value="3">niveau 3</option>
-              </select>
-          </div>
-     
-          <button type="submit"  style="background-color: black;color: white;">Conculter</button>
-          </form>
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Rechercher un cours, un prof..." id="searchInput">
         </div>
+    </div>
+
+    <div class="container" id="scheduleContainer">
+        <!-- Le contenu sera généré dynamiquement -->
+    </div>
+
+    <div class="tab-bar">
+        <button class="tab-item active " id="a">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Cours</span>
+        </button>
+        <button class="tab-item" id="b">
+            <i class="fas fa-users"></i>
+            <span>Profs</span>
+        </button>
+        <button class="tab-item" id="c">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Salles</span>
+        </button>
+        <button class="tab-item" id="d">
+            <i class="fas fa-book"></i>
+            <span>Matières</span>
+        </button>
+        <button class="tab-item" id="e"> 
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </button>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    // Variables globales
+    const dateNavigator = document.getElementById('dateNavigator');
+    const scheduleContainer = document.getElementById('scheduleContainer');
+    const searchInput = document.getElementById('searchInput');
+    const tabItems = document.querySelectorAll('.tab-item');
+    const pullIndicator = document.getElementById('pullIndicator');
+    let scheduleData = [];
+    // Récupérer le matricule depuis localStorage
+    const matricule = localStorage.getItem('matricule') || null;
+
+    // Vérifier si l'utilisateur est connecté
+    if (!matricule) {
+        scheduleContainer.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-sign-in-alt"></i>
+                <p>Veuillez vous connecter pour voir votre emploi du temps.</p>
+                <a href="/login">Se connecter</a>
+            </div>
+        `;
+        return; // Arrêter l'exécution si pas de matricule
+    }
+
+    // Fonction pour récupérer les données depuis l'API
+    async function fetchScheduleData() {
+        try {
+            const response = await fetch(`http://localhost:3001/seance/${matricule}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Ajoute un token si nécessaire : 'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            if (data.success) {
+                scheduleData = data.seances;
+                return scheduleData;
+            } else {
+                throw new Error(data.message || 'Erreur lors de la récupération des données');
+            }
+        } catch (error) {
+            console.error('Erreur API:', error);
+            scheduleContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Erreur: ${error.message}. Veuillez réessayer.</p>
+                </div>
+            `;
+            return [];
+        }
+    }
+
+    // Générer le navigateur de dates
+    function generateDateNavigator() {
+        const days = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+        const today = new Date();
+
+        dateNavigator.innerHTML = '';
+
+        for (let i = -2; i < 12; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+
+            const dateItem = document.createElement('div');
+            dateItem.className = 'date-item';
+            if (i === 0) dateItem.classList.add('active');
+
+            dateItem.innerHTML = `
+                <div class="date-day">${days[date.getDay()]}</div>
+                <div class="date-number">${date.getDate()}</div>
+            `;
+
+            dateItem.addEventListener('click', () => {
+                document.querySelectorAll('.date-item').forEach(item => item.classList.remove('active'));
+                dateItem.classList.add('active');
+
+                const selectedDate = date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                const filteredData = scheduleData.filter(item => item.date === selectedDate);
+                renderSchedule(filteredData);
+            });
+
+            dateNavigator.appendChild(dateItem);
+        }
+    }
+
+    // Regrouper les cours par horaire
+    function groupCoursesByTime(data) {
+        const groupedData = {};
+        data.forEach(item => {
+            const timeKey = item.startTime;
+            if (!groupedData[timeKey]) {
+                groupedData[timeKey] = [];
+            }
+            groupedData[timeKey].push(item);
+        });
+        return groupedData;
+    }
+
+    // Afficher l'emploi du temps
+    function renderSchedule(data) {
+        scheduleContainer.innerHTML = '';
+
+        if (data.length === 0) {
+            scheduleContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="far fa-calendar-times"></i>
+                    <p>Aucun cours prévu pour cette journée</p>
+                </div>
+            `;
+            return;
+        }
+
+        const groupedCourses = groupCoursesByTime(data);
+        const sortedTimes = Object.keys(groupedCourses).sort((a, b) => {
+            const hourA = parseInt(a.split('h')[0]);
+            const hourB = parseInt(b.split('h')[0]);
+            return hourA - hourB;
+        });
+
+        sortedTimes.forEach(time => {
+            const timeLabel = document.createElement('div');
+            timeLabel.className = 'time-label';
+            timeLabel.textContent = time;
+            scheduleContainer.appendChild(timeLabel);
+
+            groupedCourses[time].forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = `course-card ${course.type || 'default'}`;
+                courseCard.innerHTML = `
+                    <div class="course-indicator"></div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <div class="course-name">${course.course}</div>
+                            <div class="course-time">${course.startTime} - ${course.endTime}</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span>${course.professor}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${course.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                scheduleContainer.appendChild(courseCard);
+            });
+        });
+
+        const lastUpdate = new Date().toLocaleDateString('fr-FR');
+        scheduleContainer.innerHTML += `
+            <p class="refresh-hint">Emploi du temps mis à jour le ${lastUpdate}</p>
+        `;
+    }
+
+    // Recherche
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredData = scheduleData.filter(item =>
+            item.course.toLowerCase().includes(searchTerm) ||
+            item.professor.toLowerCase().includes(searchTerm) ||
+            item.location.toLowerCase().includes(searchTerm)
+        );
+        renderSchedule(filteredData);
+    });
+
+    // Navigation entre onglets
+    tabItems.forEach(item => {
+        item.addEventListener('click', () => {
+            tabItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            const tabId = item.id;
+            switch (tabId) {
+                case 'a': // Cours
+                    renderSchedule(scheduleData);
+                    break;
+                case 'b': // Profs
+                    window.location.href = '/enseignants';
+                    break;
+                case 'c': // Salles
+                    window.location.href = '/salles';
+                    break;
+                case 'd': // Matières
+                    window.location.href = '/matieres';
+                    break;
+                case 'e': // Profil
+                    window.location.href = '/profil';
+                    break;
+            }
+        });
+    });
+
+    // Pull-to-refresh
+    let startY, currentY;
+    document.addEventListener('touchstart', e => {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+        }
+    });
+
+    document.addEventListener('touchmove', e => {
+        if (startY && window.scrollY === 0) {
+            currentY = e.touches[0].clientY;
+            const diff = currentY - startY;
+            if (diff > 30) {
+                pullIndicator.classList.add('visible');
+            } else {
+                pullIndicator.classList.remove('visible');
+            }
+        }
+    });
+
+    document.addEventListener('touchend', async () => {
+        if (pullIndicator.classList.contains('visible')) {
+            pullIndicator.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:50px;color:#2196F3"></i>';
+            const updatedData = await fetchScheduleData();
+            setTimeout(() => {
+                pullIndicator.classList.remove('visible');
+                pullIndicator.innerHTML = '<i class="fas fa-arrow-down"></i> Tirez pour actualiser';
+                renderSchedule(updatedData);
+            }, 1500);
+        }
+        startY = null;
+    });
+
+    // Initialisation
+    async function init() {
+        const data = await fetchScheduleData();
+        generateDateNavigator();
+        renderSchedule(data);
+    }
+
+    init();
+});
+    </script>
 </body>
 </html>

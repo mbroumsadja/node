@@ -1,13 +1,19 @@
-import {Sequelize} from 'sequelize';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import 'dotenv/config';
 
+const sequelize = new Sequelize(
+  process.env.db_name,
+  process.env.username,
+  process.env.password,
 
-dotenv.config();
+  {
+    host: process.env.host,
+    dialect: "mysql",
+    logging: true
+  }
+);
+sequelize.authenticate()
+  .then(() => console.log("Connexion réussie à la base de données"))
+  .catch(err => console.error("Erreur de connexion :", err));
 
-const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER,process.env.DB_PASSWORD,{
-    host: process.env.DB_HOST,
-    dialect:'mysql',
-});
-
-export default sequelize
-
+export default sequelize;
