@@ -38,7 +38,8 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/seance/cm-uga-23fs0295
-
+###
+GET http://localhost:3001/seance
 ###
 GET http://localhost:3000/login
 ###
@@ -49,8 +50,8 @@ Content-Type: application/json
 
 [
   {
-    "cours": "Introduction à la programmation",
-    "jour": "03-04-2025",
+    "cours": "poo",
+    "jour": "08-04-2025",
     "lieu": "Amphi 200",
     "debut": "08:00",
     "fin": "10:00",
@@ -60,8 +61,8 @@ Content-Type: application/json
     "create_by": "cm-uga-23FS0295"
     },
     {
-    "cours": "Mathématiques discrètes",
-    "jour": "03-04-2025",
+    "cours": "infographie",
+    "jour": "05-04-2025",
     "lieu": "Amphi 200",
     "debut": "10:30",
     "fin": "12:30",
@@ -71,8 +72,8 @@ Content-Type: application/json
     "create_by": "cm-uga-23FS0295"
     },
     {
-    "cours": "Électronique numérique",
-    "jour": "03-04-2025",
+    "cours": "analyse 2",
+    "jour": "06-04-2025",
     "lieu": "Salle B12",
     "debut": "08:00",
     "fin": "11:00",
@@ -82,3 +83,6 @@ Content-Type: application/json
     "create_by": "cm-uga-23FS0295"
   }
   ]
+
+###
+PUT  http://localhost:3001/update_seance/f3035eaa-12a2-4a1b-860c-6f0330f7c78b

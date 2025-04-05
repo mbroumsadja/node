@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/login_admin" method="post">
+        <form id="forms">
             <div class="message" id="message"></div>
             <div class="title">Login to schedule</div>
            <div class="inputs">
@@ -32,7 +32,35 @@
     <script>
         const message = document.getElementById('message');
         message.textContent ="WELCOM"
+const forms  = document.getElementById('forms')
+        forms.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+        };
         
+        try {
+            const response = await fetch('http://localhost:3001/login_admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (!result.success) {
+                alert(result.message);
+            }
+            message.textContent = result.message
+            window.location.href = '/admin_seance'
+            return
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Erreur lors de la création de la séance.');
+        }
+    })
     </script>
 </body>
 </html>

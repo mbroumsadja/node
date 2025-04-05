@@ -37,6 +37,12 @@ export const login_A = async (req, res) => {
             { expiresIn: '1h' }
         );
 
+        res.cookie('admin', findUser.nom, {
+            httpOnly: false,
+            // secure: process.env.NODE_ENV === 'production',
+            maxAge: 3600000 // 1 hour
+        });
+
         return res.status(200).json({
             success: true,
             message: `✅ Bienvenue ${findUser.nom}`,
@@ -52,39 +58,46 @@ export const login_A = async (req, res) => {
     }
 };
 
-export const login_U = async (req,res)=>{
-    const {matricule} = req.params;
+export const login_U = async (req, res) => {
+    const { matricule } = req.params;
     try {
         matricule.toUpperCase();
-        let matricule_correcte
+        let matricule_correcte;
         const valide = validateMatriculeFormat(matricule);
-        if(valide.isValid === true){
-           matricule_correcte = matricule;
-        }else{
+        if (valide.isValid === true) {
+            matricule_correcte = matricule;
+        } else {
             return res.status(404).json({
-                success:false,
-                message:"❌ mauvais format du matricule",
+                success: false,
+                message: "❌ mauvais format du matricule",
             });
         }
 
         const findUser = await User.findOne({
-            where:[
-                {matricule:matricule_correcte}
+            where: [
+                { matricule: matricule_correcte }
             ]
         });
 
-        if(!findUser){
-            return res.status(404).json({ 
+        if (!findUser) {
+            return res.status(404).json({
                 success: false,
                 message: "❌ Ce compte n'existe pas. ",
-                url:'Veuillez créer un compte ici http://localhost:3000/login.'
-              });
+                url: 'Veuillez créer un compte ici http://localhost:3000/sign_up.'
+            });
         }
 
-        return res.status(200).json({ 
+        // Create a cookie with the matricule
+        res.cookie('etudiant', matricule_correcte, {
+            httpOnly: false,
+            // secure: process.env.NODE_ENV === 'production',
+            maxAge: 3600000 // 1 hour
+        });
+
+        return res.status(200).json({
             success: true,
-            message: `✅ Bienvenue monsieur ${findUser.nom}`,
-          });
+            message: `✅ successful!!!`,
+        });
 
     } catch (err) {
         console.error(err);
@@ -92,6 +105,6 @@ export const login_U = async (req,res)=>{
             success: false,
             message: 'Erreur interne du serveur',
             error: process.env.NODE_ENV === 'production' ? undefined : err.message
-          });
+        });
     }
-}
+};

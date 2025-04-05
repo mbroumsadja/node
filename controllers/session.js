@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import {validateMatriculeFormat} from '../middleware/matricule_validate.js'
 import {getCurrentWeekDates} from '../utilis/week.js'
 import { formatSessionData,formatStudentData  } from '../utilis/format_data.js';
+import Admin from '../models/admin.js';
 
 const validateMatricule = (req, res, next) => {
     const { matricule } = req.params;
@@ -37,18 +38,19 @@ export const session = async (req,res)=>{
     
     // Obtention des dates de la semaine
     const { start: startDate, end: endDate } = getCurrentWeekDates();
-    
+    console.log("startDate",startDate);
     // Recherche des séances pour la semaine
     const sessions = await Session.findAll({
       where: {
-        jour: {
-          [Op.between]: [startDate, endDate]
-        },
+        // jour: {
+        //   [Op.between]: [startDate, endDate]
+        // },
         filiere: user.filiere,
         niveau: user.niveau
       },
       order: [['jour', 'ASC'], ['debut', 'ASC']]
     });
+
     // Construction de la réponse
     res.status(200).json({
       success: true,
@@ -76,8 +78,11 @@ export const session = async (req,res)=>{
 };
 
 export const create_session = async (req, res) => {
+
   const data = req.body;
-   console.log("data",data);
+
+console.log(data)
+
   if (!Array.isArray(data) || data.length === 0) {
     return res.status(400).json({
       success: false,
@@ -106,9 +111,36 @@ export const create_session = async (req, res) => {
   }
 };
 
+
+export const create_session2 = async (req, res) => {
+
+  const {cours , jour, lieu , debut, fin ,filiere,enseignant , niveau , create_by}= req.body;
+
+  try {
+    const sessions = await Session.create({
+      cours , jour, lieu , debut, fin ,filiere,enseignant , niveau , create_by
+    });
+    res.status(201).json({
+      success: true,
+      message: "✅ Les séances ont été créées avec succès.",
+      sessions
+    });
+  } catch (error) {
+    console.error('Erreur dans la route create_session', {
+      error: error.message,
+      stack: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      message: 'Erreur interne du serveur',
+      error: process.env.NODE_ENV === 'production' ? undefined : error.message
+    });
+  }
+};
 export const update_session = async (req,res)=>{
   const {id} = req.params;
-    const {cours, jour , lieu , debut, fin ,enseignant , filiere, niveau , creat_by} = req.body;
+    const {cours, jour , lieu , debut, fin ,enseignant , filiere, niveau , create_by} = req.body;
     try {
        const find_session = Session.findOne({where:{id:id}});
        if(!find_session){
@@ -117,8 +149,12 @@ export const update_session = async (req,res)=>{
           message: "❌ la seance n'existe pas.",
         });
        }
-      const session = Session.create({
-        cours, jour , lieu , debut, fin ,enseignant , filiere, niveau , creat_by
+      const session = Session.update({
+        cours, jour , lieu , debut, fin ,enseignant , filiere, niveau , create_by
+      },{
+        where:{
+          id:id
+        }
       });
       res.status(201).json({
         success: true,
@@ -158,6 +194,78 @@ export const delete_session = async (req,res)=>{
     });
   } catch (error) {
     console.error('Erreur dans la route delete_session', {
+      error: error.message,
+      stack: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      message: 'Erreur interne du serveur',
+      error: process.env.NODE_ENV === 'production' ? undefined : error.message
+    });
+  }
+}
+
+export const admin_session = async (req,res)=>{
+  const {username} = req.params
+  try {
+    const find_user = await Admin.findOne({
+      where:{nom:username}
+    });
+     if(!find_user){
+      res.status(404).json({
+        success: false,
+        message: "❌  admin n'existe pas.",
+      });
+     }
+     const { start: startDate, end: endDate } = getCurrentWeekDates();
+     const sessions = await Session.findAll({
+      where: {
+        // jour: {
+        //   [Op.between]: [startDate, endDate]
+        // },
+          create_by: username
+      },
+      order: [['jour', 'ASC'], ['debut', 'ASC']]
+    });
+    res.status(200).json({
+      success: true,
+        weekRange: {
+          debut: startDate,
+          fin: endDate
+        },
+        seances: sessions
+    });
+  } catch (error) {
+    console.error('Erreur dans la route admin_session', {
+      error: error.message,
+      stack: error.stack
+    });
+
+    res.status(500).json({
+      success: false,
+      message: 'Erreur interne du serveur',
+      error: process.env.NODE_ENV === 'production' ? undefined : error.message
+    });
+  }
+}
+
+export const super_session = async (req,res)=>{
+  try {
+     const { start: startDate, end: endDate } = getCurrentWeekDates();
+     const sessions = await Session.findAll({
+      order: [['jour', 'ASC'], ['debut', 'ASC']]
+    });
+    res.status(200).json({
+      success: true,
+        weekRange: {
+          debut: startDate,
+          fin: endDate
+        },
+        seances: sessions
+    });
+  } catch (error) {
+    console.error('Erreur dans la route admin_session', {
       error: error.message,
       stack: error.stack
     });

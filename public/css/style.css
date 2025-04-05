@@ -3,6 +3,7 @@
     padding: 0;
     font-family: "Graduate", "Times New Roman", Verdana;
     cursor: pointer;
+    font-size: 18px;
 }
 @font-face {
 	font-family: 'Graduate';
